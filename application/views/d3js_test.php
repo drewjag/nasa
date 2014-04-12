@@ -19,6 +19,9 @@
 	<li>
 		<a href="/d3js/basics">Basics</a>
 	</li>
+	<li>
+		<a href="/d3js/bar_charts">Bar Charts</a>
+	</li>
 
 </ul>
 
