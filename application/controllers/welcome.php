@@ -21,6 +21,10 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+	public function d3js_test() {
+		$this->load->view('d3js_test');
+	}
 }
 
 /* End of file welcome.php */
