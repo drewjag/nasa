@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 	}
 
 	public function d3js_test() {
-		$this->load->view('d3js_test');
+		$this->load->view('d3js_sandbox/d3js_test');
 	}
 }
 
