@@ -1,0 +1,15 @@
+CREATE  TABLE `nasa`.`asteroid` (
+  `asteroid_pk` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `full_name` VARCHAR(45) NULL ,
+  `primary_designation` VARCHAR(45) NULL ,
+  `near_earth_object` VARCHAR(1) NULL ,
+  `diameter` DOUBLE NULL ,
+  `standard_gravity` DOUBLE NULL ,
+  `spec_type_smassi` VARCHAR(3) NULL ,
+  `spec_type_tholen` VARCHAR(3) NULL ,
+  `potentially_hazardous` VARCHAR(1) NULL ,
+  `magnitude` DOUBLE NULL ,
+  `albedo` DOUBLE NULL ,
+  `earth_orbit_moid` DOUBLE NULL ,
+  `spk_id` DOUBLE UNSIGNED NULL ,
+  PRIMARY KEY (`asteroid_pk`) );
