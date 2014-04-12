@@ -20,7 +20,7 @@
 		<a href="/d3js/basics">Basics</a>
 	</li>
 	<li>
-		<a href="/d3js/bar_charts">Bar Chart and Scales</a>
+		<a href="/d3js/bar_charts">Bar Chart</a>
 	</li>
 
 </ol>

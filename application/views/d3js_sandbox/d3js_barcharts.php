@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>D3JS Bar Chart and Scales</title>
+	<title>D3JS Bar Chart</title>
 
 	<style type="text/css">
 	</style>
@@ -22,7 +22,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-	var dataArray = [340,120,150,500,230];
+	var dataArray = [340,120,150,500];
 	var width = 500;
 	var height = 500;
 
@@ -36,10 +36,20 @@ $(document).ready(function() {
 					.domain([0,500])
 					.range(["red","blue"]);
 
+	//lets add some axis
+	var axis = d3.svg.axis()
+					.ticks(5)
+					.scale(widthScale);
+
+
 	var canvas = d3.select("#container")
 					.append("svg")
 					.attr("width",width)
-					.attr("height",height);
+					.attr("height",height)
+
+					.append("g")
+					.attr("transform","translate(20,0)");
+
 
 	var bars = canvas.selectAll("rect")
 					.data(dataArray)
@@ -55,6 +65,10 @@ $(document).ready(function() {
 						.attr("y", function(eachDataElement,index) {
 							return index * 100; //adding some space between the bars
 						});
+
+	canvas.append("g")
+		.attr("transform","translate(0,400)")
+		.call(axis);
 
 });
 </script>
