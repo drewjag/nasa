@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>D3JS Test Page</title>
+	<title>D3JS Sandbox Page</title>
 
 	<style type="text/css">
 	</style>
@@ -11,9 +11,22 @@
 </head>
 <body>
 
-<div id="container">
-	<h1>D3JS Testing Page</h1>	
-</div>
+<h1>D3JS Sandbox Page</h1>	
+
+<p>
+
+<ul>
+	<li>
+		<a href="/d3js/basics">Basics</a>
+	</li>
+
+</ul>
+
+</p>
 
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+});
+</script>
 </html>
