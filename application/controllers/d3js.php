@@ -15,6 +15,11 @@ class D3js extends CI_Controller {
 		$this->load->view('d3js_sandbox/d3js_barcharts');
 	}
 
+	public function transitions() {
+		$this->load->view('d3js_sandbox/d3js_transitions');
+	}
+
+
 }
 
 /* End of file welcome.php */

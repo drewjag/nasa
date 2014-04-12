@@ -22,6 +22,9 @@
 	<li>
 		<a href="/d3js/bar_charts">Bar Chart</a>
 	</li>
+	<li>
+		<a href="/d3js/transitions">Transitions</a>
+	</li>
 
 </ol>
 
