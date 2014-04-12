@@ -12,4 +12,5 @@ INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_
 INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_measurement_fk`) VALUES (6,'weight',2);
 INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_measurement_fk`) VALUES (7,'price',4);
 INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_measurement_fk`) VALUES (8,'profit',4);
-INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_measurement_fk`) VALUES (9,'dimater',1);
+INSERT INTO `measurement_map` (`messurement_map_pk`,`measurement_name`,`unit_of_measurement_fk`) VALUES (9,'diameter',1);
+
