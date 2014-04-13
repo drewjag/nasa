@@ -1,15 +1,10 @@
 <?php
-class Compare_model extends Model
+class Compare_model extends CI_Model
 {
-
-    function __construct()
-    {
-        parent::Model();
-    }
 
     function get_default_compare()
     {
-        $sql = "SELECT * FROM nasa.comparison_objects WHERE comparison_objects_pk < 5";
+        $sql = "SELECT * FROM nasa.comparison_objects WHERE comparison_object_pk < 5";
         return $this->db->query($sql,array())->result_array();
     }
 

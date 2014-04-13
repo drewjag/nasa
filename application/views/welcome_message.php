@@ -82,7 +82,7 @@
                 <input type="text" name="spk_id" id="spk_id" />
                 <select id="spec_type" name="spec_type">
                     <? foreach($spec_types as $spec_type) : ?>
-                        <option value ="<?= $spec_type ?>"><?= $spec_type ?></option>
+                        <option value ="<?=$spec_type['spec_type_smassi'] ?>"><?=$spec_type['spec_type_smassi']?></option>
                     <? endforeach ?>
                 </select>
                 <select id="near_earth_object" name="near_earth_object">
@@ -100,7 +100,8 @@
                 <td>Full Name</td>
                 <td>Near Earth Object</td>
                 <td>Diameter</td>
-                <td>Spec Type</td>
+                <td>Spec Type SMASSI</td>
+                <td>Spec Type Tholen</td>
                 <td>Potentially Hazardous</td>
                 <td>Magnitude</td>
                 <td>spk_id</td>
@@ -108,13 +109,14 @@
             </tr>
             </thead>
                 <tr>
-                    <td><?= $asteroid['full_name'] ?></td>
-                    <td><?= $asteroid['near_earth_object'] ?></td>
-                    <td><?= $asteroid['diameter'] ?></td>
-                    <td><?= $asteroid['spec_type'] ?></td>
-                    <td><?= $asteroid['potentially_hazardous'] ?></td>
-                    <td><?= $asteroid['magnitude'] ?></td>
-                    <td><?= $asteroid['spk_id'] ?></td>
+                    <td><?= $asteroid[0]['full_name'] ?></td>
+                    <td><?= $asteroid[0]['near_earth_object'] ?></td>
+                    <td><?= $asteroid[0]['diameter'] ?></td>
+                    <td><?= $asteroid[0]['spec_type_smassi'] ?></td>
+                    <td><?= $asteroid[0]['spec_type_tholen'] ?></td>
+                    <td><?= $asteroid[0]['potentially_hazardous'] ?></td>
+                    <td><?= $asteroid[0]['magnitude'] ?></td>
+                    <td><?= $asteroid[0]['spk_id'] ?></td>
                 </tr>
         </table>
 

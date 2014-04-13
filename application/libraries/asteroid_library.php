@@ -102,13 +102,18 @@ class Asteroid_Library
 
     function get_random_asteroid()
     {
-        $num_asteroids = $this->asteroid_model->get_asteroid_count();
+        //$num_asteroids = $this->asteroid_model->get_asteroid_count();
 
-        $rand = 0;
+        $rand = 1;
 
-        $asteroid = $this->asteroid_model->get_asteroid_data_by_pk($rand);
+        $asteroid = $this->CI->asteroid_model->get_asteroid_data_by_pk($rand);
 
         return $asteroid;
+    }
+
+    function get_all_spec_types(){
+
+        return $this->CI->asteroid_model->get_distinct_spec_types();
     }
 
 }
