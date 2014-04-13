@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Search for Asteroids</title>
+	<title>Asteroid Results</title>
 
 	<style type="text/css">
 
@@ -67,32 +67,9 @@
 <body>
 
 <div id="container">
-	<h1>Search for Asteroids</h1>
+	<h1>Asteroid Results</h1>
 
 	<div id="body">
-
-        <form action="/search/search_asteroid">
-
-            <table>
-                <input type="text" name="text_search" id="text_search" />
-                <input type="text" name="magnitude_min" id="magnitude_min" />
-                <input type="text" name="magnitude_max" id="magnitude_max" />
-                <input type="text" name="diameter_max" id="diameter_max" />
-                <input type="text" name="diameter_min" id="diameter_min" />
-                <input type="text" name="spk_id" id="spk_id" />
-                <select id="spec_type" name="spec_type">
-                    <? foreach($spec_types as $spec_type) : ?>
-                        <option value ="<?= $spec_type ?>"><?= $spec_type ?></option>
-                    <? endforeach ?>
-                </select>
-                <select id="near_earth_object" name="near_earth_object">
-                        <option value ="Y">Y</option>
-                        <option value ="N">N</option>
-                </select>
-
-                <submit>Submit</submit>
-            </table>
-        </form>
 
         <table>
             <thead>
@@ -107,20 +84,43 @@
 
             </tr>
             </thead>
-                <tr>
-                    <td><?= $asteroid['full_name'] ?></td>
-                    <td><?= $asteroid['near_earth_object'] ?></td>
-                    <td><?= $asteroid['diameter'] ?></td>
-                    <td><?= $asteroid['spec_type'] ?></td>
-                    <td><?= $asteroid['potentially_hazardous'] ?></td>
-                    <td><?= $asteroid['magnitude'] ?></td>
-                    <td><?= $asteroid['spk_id'] ?></td>
-                </tr>
+
+            <tr>
+                <td><?= $asteroid['full_name'] ?></td>
+                <td><?= $asteroid['near_earth_object'] ?></td>
+                <td><?= $asteroid['diameter'] ?></td>
+                <td><?= $asteroid['spec_type'] ?></td>
+                <td><?= $asteroid['potentially_hazardous'] ?></td>
+                <td><?= $asteroid['magnitude'] ?></td>
+                <td><?= $asteroid['spk_id'] ?></td>
+            </tr>
         </table>
+
+        <? foreach($comparison_output as $compare_value) : ?>
+
+            <table>
+                <thead>
+                <tr>
+                    <td>Object Name</td>
+                    <td>Number of objects</td>
+                    <td>Asteroid Mass</td>
+                    <td>Compare Type</td>
+                </tr>
+                </thead>
+
+                <tr>
+                    <td><?= $compare_value['object_name'] ?></td>
+                    <td><?= $compare_value['num_of_objects'] ?></td>
+                    <td><?//= $compare_value['mass'] ?></td>
+                    <td><?= $asteroid['name'] ?></td>
+                </tr>
+            </table>
+
+        <? endforeach ?>
 
 	</div>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+
 </div>
 
 </body>

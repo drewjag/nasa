@@ -1,6 +1,6 @@
 <?php
 
-class Asteroid_search
+class Asteroid_Library
 {
 
     function __construct()
@@ -102,13 +102,13 @@ class Asteroid_search
 
     function get_random_asteroid()
     {
-        $asteroid_data = $this->asteroid_model->get_random_asteroid();
+        $num_asteroids = $this->asteroid_model->get_asteroid_count();
 
-        $result = array($asteroid_data);
+        $rand = 0;
 
-        $output = prepare_results_for_output($result);
+        $asteroid = $this->asteroid_model->get_asteroid_data_by_pk($rand);
 
-        return $output;
+        return $asteroid;
     }
 
 }
