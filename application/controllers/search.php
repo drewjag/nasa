@@ -30,9 +30,9 @@ class Search extends CI_Controller {
         $diameter_max = $this->input->post("diameter_max");
         $diameter_min = $this->input->post("diameter_min");
         $near_earth_object = $this->input->post("near_earth_object");
-        $text = $this->input->post("text_search");
+        $text = $this->input->post('text_search');
 
-        list($data['asteroid_result'], $data['num_rows']) = $this->asteroid_search_library->asteroid_search($spec_type, $magnitude_min, $magnitude_max, $spk_id, $diameter_max, $diameter_min, $near_earth_object, $text);
+        list($data['asteroid_result'], $data['num_rows']) = $this->asteroid_library->asteroid_search($spec_type, $magnitude_min, $magnitude_max, $spk_id, $diameter_max, $diameter_min, $near_earth_object, $text);
 
         $this->load->view('asteroid_result',$data);
     }

@@ -71,7 +71,7 @@
 
 	<div id="body">
 
-        <form action="/search/search_asteroid">
+        <form action="index.php/search/search_asteroid" method="post">
 
             <table>
                 <input type="text" name="text_search" id="text_search" />
@@ -90,7 +90,7 @@
                         <option value ="N">N</option>
                 </select>
 
-                <submit>Submit</submit>
+                <input type="submit" value="Submit">
             </table>
         </form>
 
