@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Search for Asteroids</title>
+	<title>Asteroid Results</title>
 
 	<style type="text/css">
 
@@ -67,32 +67,9 @@
 <body>
 
 <div id="container">
-	<h1>Search for Asteroids</h1>
+	<h1>Asteroid Results</h1>
 
 	<div id="body">
-
-        <form action="/search/search_asteroid">
-
-            <table>
-                <input type="text" name="text_search" id="text_search" />
-                <input type="text" name="magnitude_min" id="text_search" />
-                <input type="text" name="magnitude_max" id="text_search" />
-                <input type="text" name="diameter_max" id="text_search" />
-                <input type="text" name="diameter_min" id="text_search" />
-                <input type="text" name="spk_id" id="text_search" />
-                <select id="spec_type" name="spec_type">
-                    <? foreach($spec_types as $spec_type) : ?>
-                        <option value ="<?= $spec_type ?>"><?= $spec_type ?></option>
-                    <? endforeach ?>
-                </select>
-                <select id="near_earth_object" name="near_earth_object">
-                        <option value ="Y">Y</option>
-                        <option value ="N">N</option>
-                </select>
-
-                <submit>Submit</submit>
-            </table>
-        </form>
 
         <table>
             <thead>
@@ -107,6 +84,7 @@
 
             </tr>
             </thead>
+            <? foreach($asteroid_result as $asteroid) :?>
                 <tr>
                     <td><?= $asteroid['full_name'] ?></td>
                     <td><?= $asteroid['near_earth_object'] ?></td>
@@ -116,6 +94,7 @@
                     <td><?= $asteroid['magnitude'] ?></td>
                     <td><?= $asteroid['spk_id'] ?></td>
                 </tr>
+            <? endforeach ?>
         </table>
 
 	</div>

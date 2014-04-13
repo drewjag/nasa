@@ -20,6 +20,21 @@ class Asteroid_model extends Model
         return $result['count'];
     }
 
+    function search($where, $data_array)
+    {
+        $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM nasa.asteroid ";
+        if (!empty($where) && is_array($data_array))
+        {
+            $sql .= $where;
+        }
+
+        $result = $this->db->query($sql,$data_array)->result_array();
+
+        $num_rows = $this->db->query("SELECT FOUND_ROWS() AS num_results")->row()->num_results;
+
+        return array($result, $num_rows);
+    }
+
 
 
 
