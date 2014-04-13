@@ -103,7 +103,7 @@
                 <tr>
                     <td>Object Name</td>
                     <td>Number of objects</td>
-                    <td>Asteroid Mass</td>
+                    <td>Object Larger than Asteroid</td>
                     <td>Compare Type</td>
                 </tr>
                 </thead>
@@ -111,7 +111,7 @@
                 <tr>
                     <td><?= $compare_value['object_name'] ?></td>
                     <td><?= $compare_value['num_of_objects'] ?></td>
-                    <td><?//= $compare_value['mass'] ?></td>
+                    <td><?= ($compare_value['object_larger'] === true) ? 'Y' : 'N' ?></td>
                     <td><?= $asteroid['name'] ?></td>
                 </tr>
             </table>

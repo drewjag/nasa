@@ -15,6 +15,7 @@ CREATE TABLE `nasa`.`unit_of_measurement` (
   `measurement_type` varchar(45) NOT NULL,
   `unit_of_measurement` varchar(45) NOT NULL,
   `short_name_uofm` varchar(45) NOT NULL,
+  `base_measurement_ratio` double NOT NULL,
   PRIMARY KEY (`unit_of_measurement_pk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
