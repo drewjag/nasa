@@ -16,7 +16,8 @@ class Search extends CI_Controller {
 		$data['comparison_objects'] = $this->compare_model->get_default_compare();
 
         $data['spec_types'] = $this->asteroid_library->get_all_spec_types();
-	
+
+        //var_dump($data);
 		$this->load->view('welcome_message',$data);
 	}
 

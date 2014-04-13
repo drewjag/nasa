@@ -81,9 +81,9 @@
                 <input type="text" name="diameter_min" id="diameter_min" />
                 <input type="text" name="spk_id" id="spk_id" />
                 <select id="spec_type" name="spec_type">
-                    <? foreach($spec_types as $spec_type) : ?>
-                        <option value ="<?=$spec_type['spec_type_smassi'] ?>"><?=$spec_type['spec_type_smassi']?></option>
-                    <? endforeach ?>
+                    <? foreach($spec_types as $type) : ?>
+                        <option value ="<?= $type['spec_type_smassi'] ?>"><?= $type['spec_type_smassi'] ?></option>
+                    <? endforeach; ?>
                 </select>
                 <select id="near_earth_object" name="near_earth_object">
                         <option value ="Y">Y</option>
