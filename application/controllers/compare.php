@@ -40,9 +40,9 @@ class Compare extends CI_Controller {
         $compare_object['measurement_value'] = $this->input->post('object_value');
         $compare_object['image_url'] = $this->input->post('image_url');
 
-        $this->compare_model->insert_compare_object($compare_object);
+        $object_id = $this->compare_model->insert_compare_object($compare_object);
 
-        echo 'success!';
+        $this->view_asteroid(1,$object_id);
     }
 
     public function view_asteroid($asteroid_pk = null,$compare_object_pk = null)
@@ -58,6 +58,12 @@ class Compare extends CI_Controller {
 
         $compare_object_array = array();
         $exclude_object_pks = array();
+
+        $object_compare = $this->input->post('object_compare');
+        if (empty($compare_object_pk) && $object_compare !== false)
+        {
+            $compare_object_pk = $object_compare;
+        }
 
         if (!empty($compare_object_pk))
         {
@@ -86,6 +92,7 @@ class Compare extends CI_Controller {
 
         $data['comparison_output'] = $comparison_output;
         $data['asteroid'] = $asteroid;
+        $data['comparison_object_options'] = $this->compare_model->get_all_objects();
 
         $this->load->view('asteroid_compare_view',$data);
 

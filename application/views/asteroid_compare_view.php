@@ -41,6 +41,23 @@
             </tr>
         </table>
 
+        <h3>Compare Object to Asteroid</h3>
+        <table>
+            <form action="/index.php/compare/view_asteroid/744" method="post">
+                <select id="object_compare" name="object_compare">
+                    <? foreach($comparison_object_options as $key => $value) : ?>
+                        <option value="<?= $key; ?>"><?= $value; ?></option>
+                    <? endforeach ?>
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        </table>
+        <table>
+            <a href="/index.php/compare">Add Object to list</a><br/>
+        </table>
+
+        <h3>Random Objects Compared to Asteroid</h3>
+
         <? foreach($comparison_output as $compare_value) : ?>
 
             <table class="table">
