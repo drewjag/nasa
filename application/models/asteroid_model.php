@@ -33,7 +33,26 @@ class Asteroid_model extends CI_Model
     function get_distinct_spec_types(){
         $sql = "SELECT DISTINCT spec_type_smassi FROM asteroid";
         $result = $this->db->query($sql, array())->result_array();
-        return $result;
+        foreach($result as $row)
+        {
+            if (isset($row['spec_type_smassi']) && !empty($row['spec_type_smassi']))
+            {
+                $smassi_array[$row['spec_type_smassi']] = $row['spec_type_smassi'];
+            }
+        }
+
+        $sql = "SELECT DISTINCT spec_type_tholen FROM asteroid";
+        $result = $this->db->query($sql, array())->result_array();
+        foreach($result as $row)
+        {
+            if (isset($row['spec_type_tholen']) && !empty($row['spec_type_tholen']))
+            {
+                $tholen_array[$row['spec_type_tholen']] = $row['spec_type_tholen'];
+            }
+        }
+
+        $type_array = array_merge($smassi_array,$tholen_array);
+        return $type_array;
     }
 
 

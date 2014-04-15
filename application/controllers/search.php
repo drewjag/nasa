@@ -17,8 +17,8 @@ class Search extends CI_Controller {
 
         $data['spec_types'] = $this->asteroid_library->get_all_spec_types();
 
-        //var_dump($data);
-		$this->load->view('welcome_message',$data);
+        echo print_r($data,true);
+		$this->load->view('asteroid_search',$data);
 	}
 
     public function search_asteroid()

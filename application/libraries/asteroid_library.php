@@ -104,7 +104,9 @@ class Asteroid_Library
             $asteroid['diameter'] = $row['diameter'];
             $asteroid['potentially_hazardous'] = $row['potentially_hazardous'];
             $asteroid['magnitude'] = $row['magnitude'];
-            $asteroid['spk_id'] = $row['spk_id'];
+            $asteroid['spk_id'] = ltrim($row['spk_id'],'0');
+            $asteroid['spec_type_smassi'] = $row['spec_type_smassi'];
+            $asteroid['spec_type_tholen'] = $row['spec_type_tholen'];
 
             if (isset($row['spec_type_smassi']) && !empty($row['spec_type_smassi']))
             {
