@@ -57,19 +57,26 @@ class Compare extends CI_Controller {
         }
 
         $compare_object_array = array();
+        $exclude_object_pks = array();
 
         if (!empty($compare_object_pk))
         {
-            $compare_object_array[] = $this->compare_library->get_compare_object_by_pk($compare_object_pk);
+            $compare_object = $this->compare_library->get_compare_object_by_pk($compare_object_pk);
+            $compare_object_array[$compare_object['comparison_object_pk']] = $compare_object;
+            $exclude_object_pks[] = $compare_object['comparison_object_pk'];
         }
         else
         {
-            $compare_object_array[] = $this->compare_library->get_random_compare_object();
+            $compare_object = $this->compare_library->get_random_compare_object();
+            $compare_object_array[$compare_object['comparison_object_pk']] = $compare_object;
+            $exclude_object_pks[] = $compare_object['comparison_object_pk'];
         }
 
         for($i=0;$i<4;$i++)
         {
-            $compare_object_array[] = $this->compare_library->get_random_compare_object();
+            $compare_object = $this->compare_library->get_random_compare_object($exclude_object_pks);
+            $compare_object_array[$compare_object['comparison_object_pk']] = $compare_object;
+            $exclude_object_pks[] = $compare_object['comparison_object_pk'];
         }
 
         foreach ($compare_object_array as $compare_object)
