@@ -16,16 +16,14 @@ class Compare_library
 
     function get_random_compare_object($exclude_pks = array())
     {
-        $num_compare_objects = $this->CI->compare_model->get_num_compare_objects();
+        $rand_pk = $this->CI->compare_model->get_random_compare_pk();
 
-        $rand = rand ( 1 , $num_compare_objects );
-
-        while (in_array($rand,$exclude_pks))
+        while (in_array($rand_pk,$exclude_pks))
         {
-            $rand = rand ( 1 , $num_compare_objects );
+            $rand_pk = $this->CI->compare_model->get_random_compare_pk();
         }
 
-        return $this->get_compare_object_by_pk($rand);
+        return $this->get_compare_object_by_pk($rand_pk);
     }
 
     function compare_object_to_asteroid($compare_object,$asteroid)

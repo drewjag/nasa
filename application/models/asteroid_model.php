@@ -55,5 +55,12 @@ class Asteroid_model extends CI_Model
         return $type_array;
     }
 
+    function get_random_pk()
+    {
+        $sql = "SELECT * FROM nasa.asteroid ORDER BY RAND() LIMIT 0,1";
+        $result = $this->db->query($sql)->row_array();
+        return $result['asteroid_pk'];
+    }
+
 
 }

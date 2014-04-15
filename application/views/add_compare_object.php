@@ -71,27 +71,33 @@
 
 	<div id="body">
 
-        <form action="/compare/add_compare_object">
+        <form action="/index.php/compare/add_compare_object" method="post">
 
             <table>
+                <label for="compare_type">Comparison Type:</label>
                 <select id="compare_type" name="compare_type">
                     <? foreach($compare_types as $pk => $compare_type) : ?>
                         <option value ="<?= $pk ?>"><?= $compare_type ?></option>
                     <? endforeach ?>
-                </select>
+                </select><br/>
+
+                <label for="measurement_type">Unit of Measurement:</label>
                 <select id="measurement_type" name="measurement_type">
                     <? foreach($measurement_types as $pk => $measurement_type) : ?>
                         <option value ="<?= $pk ?>"><?= $measurement_type ?></option>
                     <? endforeach ?>
-                </select>
+                </select><br/>
 
-                <input type="text" name="name" id="name" />
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" /><br/>
 
+                <label for="object_value">Value:</label>
+                <input type="text" name="object_value" id="object_value" /><br/>
 
-                <input type="text" name="object_value" id="object_value" />
-                <input type="text" name="image_url" id="image_url" />
+                <label for="image_url">Image URL:</label>
+                <input type="text" name="image_url" id="image_url" /><br/>
 
-                <submit>Submit</submit>
+                <input type="submit" value="Submit">
             </table>
         </form>
 

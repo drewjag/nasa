@@ -87,8 +87,8 @@
                     <td><a href="/index.php/compare/view_asteroid/<?= $asteroid_data['asteroid_pk'] ?>"><?= $asteroid_data['full_name'] ?></a></td>
                     <td><?= $asteroid_data['near_earth_object'] ?></td>
                     <td><?= $asteroid_data['diameter'] ?></td>
-                    <td><?= $asteroid_data['spec_type_smassi'] ?></td>
-                    <td><?= $asteroid_data['spec_type_tholen'] ?></td>
+                    <td><?= (isset($asteroid_data['spec_type_smassi'])) ? $asteroid_data['spec_type_smassi'] : '' ?></td>
+                    <td><?= (isset($asteroid_data['spec_type_tholen'])) ? $asteroid_data['spec_type_tholen'] : '' ?></td>
                     <td><?= $asteroid_data['potentially_hazardous'] ?></td>
                     <td><?= $asteroid_data['magnitude'] ?></td>
                     <td><?= $asteroid_data['spk_id'] ?></td>
@@ -97,7 +97,10 @@
         </table>
 
     </div>
-
+    <h2>Other Fun stuff to do:</h2>
+    <p>
+        <a href="/index.php/compare">Add Object to list of Comparison's</a><br/>
+    </p>
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 </div>
 

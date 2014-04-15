@@ -18,7 +18,7 @@ CREATE TABLE `nasa`.`compare_measurement` (
   `unit_of_measurement_fk` int(10) NOT NULL,
   CONSTRAINT `fk_compare_and_unit` FOREIGN KEY (`unit_of_measurement_fk`) REFERENCES `unit_of_measurement` (`unit_of_measurement_pk`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_compare_type_measurement` FOREIGN KEY (`compare_type_fk`) REFERENCES `compare_type` (`compare_type_pk`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  PRIMARY KEY (`compare_type_fk`)
+  PRIMARY KEY (`compare_type_fk`,`unit_of_measurement_fk`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `nasa`.`comparison_objects` (

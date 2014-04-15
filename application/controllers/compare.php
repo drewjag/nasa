@@ -25,7 +25,7 @@ class Compare extends CI_Controller {
 
         foreach($measurement_types as $measurement_type)
         {
-            $measurement_type_array[$measurement_type['compare_type_pk']] = $measurement_type['name'];
+            $measurement_type_array[$measurement_type['unit_of_measurement_pk']] = $measurement_type['short_name_uofm'];
         }
         $data['measurement_types'] = $measurement_type_array;
 
@@ -41,8 +41,8 @@ class Compare extends CI_Controller {
         $compare_object['image_url'] = $this->input->post('image_url');
 
         $this->compare_model->insert_compare_object($compare_object);
-        $this->index();
 
+        echo 'success!';
     }
 
     public function view_asteroid($asteroid_pk = null,$compare_object_pk = null)
