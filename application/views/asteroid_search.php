@@ -6,13 +6,15 @@
 
     <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 
 <div id="container">
-    <h1>Search for Asteroids</h1>
+    <div class="jumbotron">
+        <h1>Welcome to NASA.achievers!</h1>
+        <p>Search for an asteroid here!</p>
+    </div>
 
     <div id="body">
 
@@ -41,7 +43,7 @@
                     </td></tr>
                 <tr><td>
                         <label for="spk_id">SPK ID:</label>
-                        <input type="text" name="spk_id" id="spk_id" />
+                        <input type="text" name="spk_id_input" id="spk_id_input" />
                     </td></tr>
                 <tr><td>
                         <label for="spec_type">Asteroid Type:</label>
@@ -61,7 +63,7 @@
                         </select>
                     </td></tr>
                 <tr><td>
-                        <input type="submit" value="Submit">
+                        <input class="btn btn-success btn-primary btn-lg" type="submit" value="Submit">
                     </td></tr>
             </table>
         </form>
@@ -84,17 +86,18 @@
             </thead>
             <? foreach($asteroid as $asteroid_data) : ?>
                 <tr>
-                    <td><a href="/index.php/compare/view_asteroid/<?= $asteroid_data['asteroid_pk'] ?>"><?= $asteroid_data['full_name'] ?></a></td>
-                    <td><?= $asteroid_data['near_earth_object'] ?></td>
-                    <td><?= $asteroid_data['diameter'] ?></td>
-                    <td><?= (isset($asteroid_data['spec_type_smassi'])) ? $asteroid_data['spec_type_smassi'] : '' ?></td>
-                    <td><?= (isset($asteroid_data['spec_type_tholen'])) ? $asteroid_data['spec_type_tholen'] : '' ?></td>
-                    <td><?= $asteroid_data['potentially_hazardous'] ?></td>
-                    <td><?= $asteroid_data['magnitude'] ?></td>
-                    <td><?= $asteroid_data['spk_id'] ?></td>
+                    <td><a id="full_name" href="index.php/compare/view_asteroid/<?= $asteroid_data['asteroid_pk'] ?>"><?= $asteroid_data['full_name'] ?></a></td>
+                    <td id="neo"><?= $asteroid_data['near_earth_object'] ?></td>
+                    <td id="diameter"><?= $asteroid_data['diameter'] ?></td>
+                    <td id="spec_type_smassi"><?= (isset($asteroid_data['spec_type_smassi'])) ? $asteroid_data['spec_type_smassi'] : '' ?></td>
+                    <td id="spec_type_tholen"><?= (isset($asteroid_data['spec_type_tholen'])) ? $asteroid_data['spec_type_tholen'] : '' ?></td>
+                    <td id="potentially_hazardous"><?= $asteroid_data['potentially_hazardous'] ?></td>
+                    <td id="magnitude"><?= $asteroid_data['magnitude'] ?></td>
+                    <td id="spk_id"><?= $asteroid_data['spk_id'] ?></td>
                 </tr>
             <? endforeach ?>
         </table>
+        <p><a id="random_asteroid_button" class="btn btn-primary btn-lg" role="button">New Asteroid!</a></p>
 
     </div>
     <h2>Other Fun stuff to do:</h2>
@@ -106,3 +109,33 @@
 
 </body>
 </html>
+
+<script src="/scripts/jquery-1.11.0.min.js"></script>
+<script src="/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script>
+
+    var $random_asteroid = $('#random_asteroid_button');
+
+    $random_asteroid.click(function(){
+
+        $.ajax({
+            url: "index.php/search/get_random_asteroid",
+            success: function(data){
+                console.log(data);
+                $('#full_name').attr('href', "index.php/compare/view_asteroid/" + data[0].asteroid_pk);
+                $('#full_name').text(data[0].full_name);
+                $('#neo').text(data[0].near_earth_object);
+                $('#diameter').text(data[0].diameter);
+                $('#spec_type_smassi').text(data[0].spec_type_smassi);
+                $('#spec_type_tholen').text(data[0].spec_type_tholen);
+                $('#potentially_hazardous').text(data[0].potentially_hazardous);
+                $('#spk_id').text(data[0].spk_id);
+                $('#magnitude').text(data[0].magnitude);
+            },
+            dataType: 'json'
+        });
+
+    });
+
+</script>

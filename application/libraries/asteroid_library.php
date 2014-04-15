@@ -17,7 +17,8 @@ class Asteroid_Library
         if ($spec_type != null)
         {
             $data_array[] = $spec_type;
-            $where .= "spec_type_smassi = ? OR spec_type_tholen = ? ";
+            $data_array[] = $spec_type;
+            $where .= "( spec_type_smassi = ? OR spec_type_tholen = ? )";
         }
 
         if ($magnitude_min != null)
