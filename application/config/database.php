@@ -64,6 +64,10 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$database_override = "application/config/database_override.php";
+if(file_exists($database_override)) {
+	include($database_override);
+}
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
