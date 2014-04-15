@@ -1,9 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Compare extends CI_Controller {
 
 	function __construct()
     {
+        parent::__construct();
 		$this->load->model('asteroid_model');
 		$this->load->model('compare_model');
 	}
@@ -21,6 +22,7 @@ class Welcome extends CI_Controller {
 
         $measurement_types = $this->compare_model->get_unit_of_measurement_by_compare_type(1);
         $measurement_type_array = array();
+
         foreach($measurement_types as $measurement_type)
         {
             $measurement_type_array[$measurement_type['compare_type_pk']] = $measurement_type['name'];
@@ -47,27 +49,27 @@ class Welcome extends CI_Controller {
     {
         if (!empty($asteroid_pk))
         {
-            $asteroid = $this->asteroid_model->get_asteroid_data_by_pk($asteroid_pk);
+            $asteroid = $this->asteroid_library->get_asteroid_by_pk($asteroid_pk);
         }
         else
         {
-            $asteroid = $this->asteroid_model->get_random_asteroid();
+            $asteroid = $this->asteroid_library->get_random_asteroid();
         }
 
         $compare_object_array = array();
 
         if (!empty($compare_object_pk))
         {
-            $compare_object_array[] = $this->compare_model->get_compare_object_by_pk($compare_object_pk);
+            $compare_object_array[] = $this->compare_library->get_compare_object_by_pk($compare_object_pk);
         }
         else
         {
-            $compare_object_array[] = $this->compare_model->get_random_compare_object();
+            $compare_object_array[] = $this->compare_library->get_random_compare_object();
         }
 
         for($i=0;$i<4;$i++)
         {
-            $compare_object_array[] = $this->compare_model->get_random_compare_object();
+            $compare_object_array[] = $this->compare_library->get_random_compare_object();
         }
 
         foreach ($compare_object_array as $compare_object)
@@ -85,4 +87,4 @@ class Welcome extends CI_Controller {
 }
 
 /* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* Location: ./application/controllers/compare.php */

@@ -17,7 +17,7 @@ class Asteroid_Library
         if ($spec_type != null)
         {
             $data_array[] = $spec_type;
-            $where .= "spec_type_smassi = ? ";
+            $where .= "spec_type_smassi = ? OR spec_type_tholen = ? ";
         }
 
         if ($magnitude_min != null)
@@ -65,7 +65,7 @@ class Asteroid_Library
             $where .= "diameter < ? ";
         }
 
-        if ($near_earth_object != null)
+        if ($near_earth_object != null && !empty($near_earth_object))
         {
             if(!empty($data_array)){
                 $where .= "AND ";
@@ -84,6 +84,11 @@ class Asteroid_Library
             $where .= "full_name LIKE ? OR primary_designation LIKE ? ";
         }
 
+        if ($where == " WHERE ")
+        {
+            $where = '';
+        }
+
         list($result, $num_rows) = $this->CI->asteroid_model->search($where, $data_array);
 
         $output = $this->prepare_results_for_output($result);
@@ -99,6 +104,7 @@ class Asteroid_Library
         {
             $asteroid = array();
 
+            $asteroid['asteroid_pk'] = $row['asteroid_pk'];
             $asteroid['full_name'] = $row['full_name'];
             $asteroid['near_earth_object'] = $row['near_earth_object'];
             $asteroid['diameter'] = $row['diameter'];
@@ -130,9 +136,19 @@ class Asteroid_Library
 
         $rand = 1;
 
-        $asteroid = $this->CI->asteroid_model->get_asteroid_data_by_pk($rand);
+        $asteroid = $this->get_asteroid_by_pk($rand);
 
         return $asteroid;
+    }
+
+    function get_asteroid_by_pk($asteroid_pk)
+    {
+
+        $asteroid = $this->CI->asteroid_model->get_asteroid_data_by_pk($asteroid_pk);
+
+        $output = $this->prepare_results_for_output($asteroid);
+
+        return $output;
     }
 
     function get_all_spec_types(){

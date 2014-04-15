@@ -84,7 +84,7 @@
             </thead>
             <? foreach($asteroid as $asteroid_data) : ?>
                 <tr>
-                    <td><?= $asteroid_data['full_name'] ?></td>
+                    <td><a href="/index.php/compare/view_asteroid/<?= $asteroid_data['asteroid_pk'] ?>"><?= $asteroid_data['full_name'] ?></a></td>
                     <td><?= $asteroid_data['near_earth_object'] ?></td>
                     <td><?= $asteroid_data['diameter'] ?></td>
                     <td><?= $asteroid_data['spec_type_smassi'] ?></td>

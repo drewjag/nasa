@@ -6,14 +6,20 @@ class Compare_library
     function __construct()
     {
         $this->CI =& get_instance();
+        $this->CI->load->model("compare_model");
+    }
+
+    function get_compare_object_by_pk($compare_object_pk)
+    {
+        return $this->CI->compare_model->get_compare_object_by_pk($compare_object_pk);
     }
 
     function get_random_compare_object()
     {
-        $num_compare_objects = $this->compare_model->get_num_compare_objects();
+        $num_compare_objects = $this->CI->compare_model->get_num_compare_objects();
 
-        $rand = 0;
-        return $this->compare_model->get_compare_object_rand($rand);
+        $rand = rand ( 1 , 3 );
+        return $this->get_compare_object_by_pk($rand);
     }
 
     function compare_object_to_asteroid($compare_object,$asteroid)
@@ -41,7 +47,7 @@ class Compare_library
         $base_object_value = $object['base_measurement_ratio'] * $object['measurement_value'];
 
         //Diameter is in km in database
-        $base_asteroid_value = $asteroid['diameter'] * 1000;
+        $base_asteroid_value = $asteroid[0]['diameter'] * 1000;
         $radius = $base_asteroid_value / 2;
         $pie = 3.14159265359;
 
@@ -56,7 +62,7 @@ class Compare_library
         $base_object_value = $object['base_measurement_ratio'] * $object['measurement_value'];
 
         //Diameter is in km in database
-        $base_asteroid_value = $asteroid['diameter'] * 1000;
+        $base_asteroid_value = $asteroid[0]['diameter'] * 1000;
 
         return $this->is_asteroid_larger($base_object_value, $base_asteroid_value);
     }
@@ -83,13 +89,10 @@ class Compare_library
 
     function is_asteroid_larger($base_object_value, $base_asteroid_value)
     {
+        $object_larger = false;
         if ($base_object_value > $base_asteroid_value)
         {
             $object_larger = true;
-        }
-        else
-        {
-            $object_larger = false;
         }
         $num_of_objects = $base_asteroid_value / $base_object_value;
 
