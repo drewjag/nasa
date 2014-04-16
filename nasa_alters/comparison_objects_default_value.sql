@@ -16,3 +16,5 @@ INSERT INTO nasa.comparison_objects (object_name, unit_of_measurement_fk, compar
 
 INSERT INTO nasa.compare_measurement (compare_type_fk, unit_of_measurement_fk) VALUES (1,2);
 INSERT INTO nasa.compare_measurement (compare_type_fk, unit_of_measurement_fk) VALUES (1,3);
+INSERT INTO nasa.compare_measurement (compare_type_fk, unit_of_measurement_fk) VALUES (2,2);
+INSERT INTO nasa.compare_measurement (compare_type_fk, unit_of_measurement_fk) VALUES (2,3);

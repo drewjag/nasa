@@ -7,6 +7,7 @@ class Compare_library
     {
         $this->CI =& get_instance();
         $this->CI->load->model("compare_model");
+        $this->comparison_links = $this->CI->compare_model->get_compare_measurement_link();
     }
 
     function get_compare_object_by_pk($compare_object_pk)
@@ -27,18 +28,34 @@ class Compare_library
         return $this->get_compare_object_by_pk($rand_pk);
     }
 
-    function compare_object_to_asteroid($compare_object,$asteroid)
+    function compare_object_to_asteroid($compare_object,$asteroid,$compare_type_fk = null)
     {
+        $comparison_options_count = count($this->comparison_links[$compare_object['unit_of_measurement_fk']]);
 
-        if ($compare_object['name'] == 'Circumference')
+        if ($compare_type_fk === null)
+        {
+            if ($comparison_options_count == 1)
+            {
+                $rand = 0;
+            }
+            else
+            {
+                $rand = rand(0,$comparison_options_count-1);
+            }
+            $compare_type_fk = $this->comparison_links[$compare_object['unit_of_measurement_fk']][$rand]['compare_type_fk'];
+        }
+
+        $compare_object['name'] = $this->comparison_links[$compare_object['unit_of_measurement_fk']][$rand]['name'];
+
+        if ($compare_type_fk == 1)
         {
             list($compare_object['num_objects'],$compare_object['object_larger']) = $this->calculate_conversion_circumference($compare_object,$asteroid);
         }
-        elseif ($compare_object['name'] == 'Diameter')
+        elseif ($compare_type_fk == 2)
         {
             list($compare_object['num_objects'],$compare_object['object_larger']) = $this->calculate_conversion_diameter($compare_object,$asteroid);
         }
-        elseif ($compare_object['name'] == 'Composition')
+        elseif ($compare_type_fk == 3)
         {
             list($compare_object['num_objects'],$compare_object['object_larger']) = $this->calculate_conversion_composition($compare_object,$asteroid);
         }

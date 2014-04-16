@@ -73,16 +73,22 @@
 
                 <tr id="<?=$index ?>">
                     <td id="object_name"><?= $compare_value['object_name'] ?></td>
-                    <td id="num_objects"><?= round($compare_value['num_objects']) ?></td>
+                    <td id="num_objects"><?= number_format($compare_value['num_objects']) ?></td>
                     <td id="object_larger"><?= ($compare_value['object_larger'] === true) ? 'Y' : 'N' ?></td>
                     <td id="name"><?= $compare_value['name'] ?></td>
                     <td ><img id="image_url" src="<?= $compare_value['image_url'] ?>" width="250" height="200"/>
                     <td>
                 </tr>
                 <tr>
-                    <td id="calculation_<?=$index?>">You would need <?= round($compare_value['num_objects']) ?> of
-                        this <?= $compare_value['object_name'] ?> to circle the asteroid!
-                    </td>
+                    <? if ($compare_value['name'] == 'Circumference') : ?>
+                        <td id="calculation_<?=$index?>">You would need <?= number_format($compare_value['num_objects']) ?> of
+                            this <?= $compare_value['object_name'] ?> to circle the asteroid!
+                        </td>
+                    <? elseif ($compare_value['name'] == 'Diameter') : ?>
+                        <td id="calculation_<?=$index?>">You would need <?= number_format($compare_value['num_objects']) ?> of
+                            this <?= $compare_value['object_name'] ?> to go straight through the asteroid!
+                        </td>
+                    <? endif ?>
                 </tr>
             </table>
 

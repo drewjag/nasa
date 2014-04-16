@@ -12,7 +12,6 @@ class Compare_model extends CI_Model
     {
         $sql = "SELECT * FROM nasa.comparison_objects co
                         JOIN nasa.unit_of_measurement uom ON co.unit_of_measurement_fk = uom.unit_of_measurement_pk
-                        JOIN nasa.compare_type ct ON co.compare_type_fk = ct.compare_type_pk
                             WHERE comparison_object_pk = ?";
         return $this->db->query($sql,array($compare_object_pk))->row_array();
     }
@@ -63,8 +62,19 @@ class Compare_model extends CI_Model
         return $output_array;
     }
 
-
-
+    function get_compare_measurement_link()
+    {
+        $sql = "SELECT * FROM nasa.compare_type ct
+                    JOIN nasa.compare_measurement cm ON ct.compare_type_pk = cm.compare_type_fk
+                    JOIN nasa.unit_of_measurement uom ON cm.unit_of_measurement_fk = uom.unit_of_measurement_pk";
+        $result = $this->db->query($sql)->result_array();
+        $output_array = array();
+        foreach($result as $row)
+        {
+            $output_array[$row['unit_of_measurement_fk']][] = $row;
+        }
+        return $output_array;
+    }
 
 
 
