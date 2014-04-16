@@ -89,7 +89,7 @@
                     <td><?= $asteroid['full_name'] ?></td>
                     <td><?= $asteroid['near_earth_object'] ?></td>
                     <td><?= $asteroid['diameter'] ?></td>
-                    <td><?= $asteroid['spec_type'] ?></td>
+                    <td><?= (isset($asteroid['spec_type'])) ? $asteroid['spec_type'] : '' ?></td>
                     <td><?= $asteroid['potentially_hazardous'] ?></td>
                     <td><?= $asteroid['magnitude'] ?></td>
                     <td><?= $asteroid['spk_id'] ?></td>

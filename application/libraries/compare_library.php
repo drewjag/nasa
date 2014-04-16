@@ -117,8 +117,9 @@ class Compare_library
             $object_larger = true;
         }
         $num_of_objects = $base_asteroid_value / $base_object_value;
+        $num_of_objects_formatted = number_format($num_of_objects);
 
-        return array($num_of_objects, $object_larger);
+        return array($num_of_objects_formatted, $object_larger);
     }
 
 }

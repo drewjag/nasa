@@ -45,7 +45,7 @@ class Compare extends CI_Controller {
         $this->view_asteroid(1,$object_id);
     }
 
-    public function view_asteroid($asteroid_pk = null,$compare_object_pk = null)
+    public function view_asteroid($asteroid_pk = null,$compare_object_pk = null,$single_compare = false)
     {
         if (!empty($asteroid_pk))
         {
@@ -72,11 +72,14 @@ class Compare extends CI_Controller {
             $exclude_object_pks[] = $compare_object['comparison_object_pk'];
         }
 
-        for($i=0;$i<4;$i++)
+        if ($single_compare === false)
         {
-            $compare_object = $this->compare_library->get_random_compare_object($exclude_object_pks);
-            $compare_object_array[$compare_object['comparison_object_pk']] = $compare_object;
-            $exclude_object_pks[] = $compare_object['comparison_object_pk'];
+            for($i=0;$i<4;$i++)
+            {
+                $compare_object = $this->compare_library->get_random_compare_object($exclude_object_pks);
+                $compare_object_array[$compare_object['comparison_object_pk']] = $compare_object;
+                $exclude_object_pks[] = $compare_object['comparison_object_pk'];
+            }
         }
 
         foreach ($compare_object_array as $compare_object)

@@ -46,6 +46,10 @@
                 <? foreach ($comparison_object_options as $key => $value) : ?>
                     <option value="<?= $key; ?>"><?= $value; ?></option>
                 <? endforeach ?>
+            </select><br/>
+
+            <select id="compare_type_input" name="compare_type_input" style="display:none">
+                <option value="">Random Comparison</option>
             </select>
 
             <p>
@@ -73,7 +77,7 @@
 
                 <tr id="<?=$index ?>">
                     <td id="object_name"><?= $compare_value['object_name'] ?></td>
-                    <td id="num_objects"><?= number_format($compare_value['num_objects']) ?></td>
+                    <td id="num_objects"><?= $compare_value['num_objects'] ?></td>
                     <td id="object_larger"><?= ($compare_value['object_larger'] === true) ? 'Y' : 'N' ?></td>
                     <td id="name"><?= $compare_value['name'] ?></td>
                     <td ><img id="image_url" src="<?= $compare_value['image_url'] ?>" width="250" height="200"/>
@@ -81,11 +85,11 @@
                 </tr>
                 <tr>
                     <? if ($compare_value['name'] == 'Circumference') : ?>
-                        <td id="calculation_<?=$index?>">You would need <?= number_format($compare_value['num_objects']) ?> of
+                        <td id="calculation_<?=$index?>">You would need <?= $compare_value['num_objects'] ?> of
                             this <?= $compare_value['object_name'] ?> to circle the asteroid!
                         </td>
                     <? elseif ($compare_value['name'] == 'Diameter') : ?>
-                        <td id="calculation_<?=$index?>">You would need <?= number_format($compare_value['num_objects']) ?> of
+                        <td id="calculation_<?=$index?>">You would need <?= $compare_value['num_objects'] ?> of
                             this <?= $compare_value['object_name'] ?> to go straight through the asteroid!
                         </td>
                     <? endif ?>
@@ -112,12 +116,12 @@
     $submit.click(function () {
         var object_value = $('#object_compare').find(":selected").val();
         $.ajax({
-            url: "/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value,
+            url: "/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value + "/true",
             success: function (data) {
                 for(var i=0; i < data.length; i++ ){
                     var $row = $('#' + i);
                     $row.find('#object_name').text(data[i].object_name);
-                    $row.find('#num_objects').text(Math.round(data[i].num_objects));
+                    $row.find('#num_objects').text(data[i].num_objects);
                     if(data[i].object_larger){
                         $row.find('#object_larger').text('Y');
                     }else{
@@ -125,12 +129,26 @@
                     }
                     $row.find('#name').text(data[i].name);
                     $row.find('#image_url').attr('src', data[i].image_url);
-                    $('#calculation_' + i).text('You would need ' + Math.round(data[i].num_objects) + ' of this ' + data[i].object_name + ' to circle the asteroid!');
+                    var $text = 'You would need ' + data[i].num_objects + ' of this ' + data[i].object_name;
+                    if(data[i].name == 'Diameter'){
+                        $text += ' to go straight through the asteroid!';
+                    }else if(data[i].name == 'Circumference'){
+                        $text += ' to circle the asteroid!';
+                    }
+                    $('#calculation_' + i).text($text);
                 }
             },
             dataType: 'json'
         });
 
     });
+
+    var $compare_object_dropdown = $('#object_compare');
+    var $compare_type_dropdown = $('#compare_type_input');
+
+    $compare_object_dropdown.change(function() {
+        $compare_type_dropdown.show();
+    });
+
 
 </script>

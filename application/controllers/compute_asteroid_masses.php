@@ -4,12 +4,12 @@
  * Class Compute_asteroid_masses
  * @property System_model $system_model
  */
-class Compute_asteroid_masses extends POPS_Controller
+class Compute_asteroid_masses extends CI_Controller
 {
 
-	function Compute_asteroid_masses()
+	function __construct()
 	{
-		parent::POPS_Controller();
+		parent::__construct();
 	}
 
 
@@ -21,7 +21,7 @@ class Compute_asteroid_masses extends POPS_Controller
 		foreach($asteroids as $a){
 			echo $a['full_name'] . " " . $a['albedo'] . " " . $a['magnitude'] . $a['diameter'] . " ";
 
-			$spec_type = mb_substr($a['spec_type_tholen'], 0, 1);
+			$spec_type = substr($a['spec_type_tholen'], 0, 1);
 			$tholen_c_array = array ('C', 'D', 'P', 'T', 'B', 'G');
 			$tholen_s_array = array ('S', 'K', 'Q', 'V', 'R', 'A', 'E');
 			if(in_array($spec_type, $tholen_c_array)){
