@@ -58,7 +58,7 @@
 
         <h3>Random Objects Compared to Asteroid</h3>
 
-        <? foreach($comparison_output as $compare_value) : ?>
+        <? foreach($comparison_output as $index => $compare_value) : ?>
 
             <table id="comparison" class="table">
                 <thead>
@@ -106,7 +106,7 @@
     $submit.click(function () {
         var object_value = $('#object_compare').find(":selected").val();
         $.ajax({
-            url: "/nasa/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value,
+            url: "index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value,
             success: function (data) {
                 for(var i=0; i < data.length; i++ ){
                     var $row = $('#' + i);
