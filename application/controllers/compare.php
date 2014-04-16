@@ -59,12 +59,6 @@ class Compare extends CI_Controller {
         $compare_object_array = array();
         $exclude_object_pks = array();
 
-        $object_compare = $this->input->post('object_compare');
-        if (empty($compare_object_pk) && $object_compare !== false)
-        {
-            $compare_object_pk = $object_compare;
-        }
-
         if (!empty($compare_object_pk))
         {
             $compare_object = $this->compare_library->get_compare_object_by_pk($compare_object_pk);
@@ -94,8 +88,12 @@ class Compare extends CI_Controller {
         $data['asteroid'] = $asteroid;
         $data['comparison_object_options'] = $this->compare_model->get_all_objects();
 
-        $this->load->view('asteroid_compare_view',$data);
-
+        if(is_null($compare_object_pk)){
+            $this->load->view('asteroid_compare_view',$data);
+        }
+        else{
+            echo json_encode($comparison_output);
+        }
     }
 	
 }

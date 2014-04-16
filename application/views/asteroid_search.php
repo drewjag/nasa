@@ -122,7 +122,6 @@
         $.ajax({
             url: "index.php/search/get_random_asteroid",
             success: function(data){
-                console.log(data);
                 $('#full_name').attr('href', "index.php/compare/view_asteroid/" + data[0].asteroid_pk);
                 $('#full_name').text(data[0].full_name);
                 $('#neo').text(data[0].near_earth_object);

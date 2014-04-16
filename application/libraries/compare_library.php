@@ -17,10 +17,11 @@ class Compare_library
     function get_random_compare_object($exclude_pks = array())
     {
         $rand_pk = $this->CI->compare_model->get_random_compare_pk();
-
-        while (in_array($rand_pk,$exclude_pks))
+        $index = 0;
+        while (in_array($rand_pk,$exclude_pks) && $index != count($exclude_pks))
         {
             $rand_pk = $this->CI->compare_model->get_random_compare_pk();
+            $index++;
         }
 
         return $this->get_compare_object_by_pk($rand_pk);

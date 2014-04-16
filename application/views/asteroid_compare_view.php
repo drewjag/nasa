@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <script src="/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -43,14 +42,15 @@
 
         <h3>Compare Object to Asteroid</h3>
         <table>
-            <form action="/index.php/compare/view_asteroid/744" method="post">
-                <select id="object_compare" name="object_compare">
-                    <? foreach($comparison_object_options as $key => $value) : ?>
-                        <option value="<?= $key; ?>"><?= $value; ?></option>
-                    <? endforeach ?>
-                </select>
-                <input type="submit" value="Submit">
-            </form>
+            <select id="object_compare" name="object_compare">
+                <? foreach ($comparison_object_options as $key => $value) : ?>
+                    <option value="<?= $key; ?>"><?= $value; ?></option>
+                <? endforeach ?>
+            </select>
+
+            <p>
+                <button id="compare_object_submit" class="btn btn-success btn-primary">Submit</button>
+            </p>
         </table>
         <table>
             <a href="/index.php/compare">Add Object to list</a><br/>
@@ -60,7 +60,7 @@
 
         <? foreach($comparison_output as $compare_value) : ?>
 
-            <table class="table">
+            <table id="comparison" class="table">
                 <thead>
                 <tr>
                     <td>Object Name</td>
@@ -71,15 +71,18 @@
                 </tr>
                 </thead>
 
-                <tr>
-                    <td><?= $compare_value['object_name'] ?></td>
-                    <td><?= round($compare_value['num_objects']) ?></td>
-                    <td><?= ($compare_value['object_larger'] === true) ? 'Y' : 'N' ?></td>
-                    <td><?= $compare_value['name'] ?></td>
-                    <td><img src="<?= $compare_value['image_url'] ?>" width="250" height="200" /><td>
+                <tr id="<?=$index ?>">
+                    <td id="object_name"><?= $compare_value['object_name'] ?></td>
+                    <td id="num_objects"><?= round($compare_value['num_objects']) ?></td>
+                    <td id="object_larger"><?= ($compare_value['object_larger'] === true) ? 'Y' : 'N' ?></td>
+                    <td id="name"><?= $compare_value['name'] ?></td>
+                    <td ><img id="image_url" src="<?= $compare_value['image_url'] ?>" width="250" height="200"/>
+                    <td>
                 </tr>
                 <tr>
-                    <td>You would need <?= round($compare_value['num_objects']) ?> of this <?= $compare_value['object_name'] ?> to circle the asteroid!</td>
+                    <td id="calculation_<?=$index?>">You would need <?= round($compare_value['num_objects']) ?> of
+                        this <?= $compare_value['object_name'] ?> to circle the asteroid!
+                    </td>
                 </tr>
             </table>
 
@@ -92,3 +95,36 @@
 
 </body>
 </html>
+
+<script src="/scripts/jquery-1.11.0.min.js"></script>
+<script src="/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+    var $submit = $('#compare_object_submit');
+
+    $submit.click(function () {
+        var object_value = $('#object_compare').find(":selected").val();
+        $.ajax({
+            url: "/nasa/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value,
+            success: function (data) {
+                for(var i=0; i < data.length; i++ ){
+                    var $row = $('#' + i);
+                    $row.find('#object_name').text(data[i].object_name);
+                    $row.find('#num_objects').text(Math.round(data[i].num_objects));
+                    if(data[i].object_larger){
+                        $row.find('#object_larger').text('Y');
+                    }else{
+                        $row.find('#object_larger').text('N');
+                    }
+                    $row.find('#name').text(data[i].name);
+                    $row.find('#image_url').attr('src', data[i].image_url);
+                    $('#calculation_' + i).text('You would need ' + Math.round(data[i].num_objects) + ' of this ' + data[i].object_name + ' to circle the asteroid!');
+                }
+            },
+            dataType: 'json'
+        });
+
+    });
+
+</script>
