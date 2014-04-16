@@ -123,6 +123,9 @@ class Asteroid_Library
             {
                 $asteroid['spec_type'] = $row['spec_type_tholen'];
             }
+            else if(empty($row['spec_type_tholen']) && empty($row['spec_type_smassi'])){
+                $asteroid['spec_type'] = "";
+            }
 
             $asteroid_data[] = $asteroid;
         }
