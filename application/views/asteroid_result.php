@@ -3,6 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<title>Asteroid Results</title>
+	
+	<?$this->load->view('snippets/header_essentials');?>
+
 
 	<style type="text/css">
 
@@ -66,7 +69,7 @@
 </head>
 <body>
 
-<div id="container">
+<div class="container">
 	<h1>Asteroid Results</h1>
 
 	<div id="body">
