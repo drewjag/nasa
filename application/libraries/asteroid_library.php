@@ -114,6 +114,8 @@ class Asteroid_Library
             $asteroid['spk_id'] = ltrim($row['spk_id'],'0');
             $asteroid['spec_type_smassi'] = $row['spec_type_smassi'];
             $asteroid['spec_type_tholen'] = $row['spec_type_tholen'];
+            $asteroid['volume'] = $row['volume'];
+            $asteroid['mass'] = $row['mass'];
 
             if (isset($row['spec_type_smassi']) && !empty($row['spec_type_smassi']))
             {

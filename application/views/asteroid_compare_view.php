@@ -92,7 +92,16 @@
                         <td id="calculation_<?=$index?>">You would need <?= $compare_value['num_objects'] ?> of
                             this <?= $compare_value['object_name'] ?> to go straight through the asteroid!
                         </td>
-                    <? endif ?>
+                    <? elseif ($compare_value['name'] == 'Composition') :?>
+                        <td id="calculation_<?=$index?>">
+                            <? if($compare_value['num_objects'] != 0) :?>
+                                You can make <?= number_format($compare_value['num_objects']) ?> of
+                                this <?= $compare_value['object_name'] ?> from the materials on this asteroid!
+                            <? else: ?>
+                                The asteroid is not made out of the material the <?= $compare_value['object_name'] ?> is made of.
+                            <? endif ?>
+                        </td>
+                    <? endif; ?>
                 </tr>
             </table>
 
@@ -135,6 +144,15 @@
                     }else if(data[i].name == 'Circumference'){
                         $text += ' to circle the asteroid!';
                     }
+                    else if(data[i].name == 'Composition'){
+                        if(data[i].num_objects != 0){
+                            $text = 'You can make ' + data[i].num_objects + ' of this ' + data[i].object_name + 'from the materials on this asteroid!';
+                        }
+                        else{
+                            $text = 'The asteroid is not made out of the material the ' + data[i].object_name + ' is made of.'
+                        }
+                    }
+
                     $('#calculation_' + i).text($text);
                 }
             },

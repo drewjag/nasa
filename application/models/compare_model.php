@@ -76,6 +76,36 @@ class Compare_model extends CI_Model
         return $output_array;
     }
 
+    function is_same_composition($object, $asteroid){
+        $sql = "SELECT a.full_name, a.spec_group_type, stg.element_fk as element FROM asteroid a
+                JOIN spec_type_group stg ON stg.spec_type_group_pk = a.spec_group_type
+                JOIN element e ON stg.element_fk = e.element_pk
+                WHERE a.asteroid_pk = ? ";
+
+        $asteroid_result = $this->db->query($sql, array($asteroid[0]['asteroid_pk']))->result_array();
+
+        if(count($asteroid_result) == 0){
+            return false;
+        }
+
+        $sql = "SELECT co.object_name, e.element_pk as element FROM comparison_objects co
+                JOIN object_composition oc ON oc.comparison_object_fk = co.comparison_object_pk
+                JOIN element e ON oc.element_fk = e.element_pk
+                WHERE co.comparison_object_pk = ?";
+
+        $object_result = $this->db->query($sql, array($object['comparison_object_pk']))->result_array();
+
+
+        if(count($object_result) == 0){
+            return false;
+        }
+
+        if($object_result[0]['element'] == $asteroid_result[0]['element']){
+            return true;
+        }
+        return false;
+    }
+
 
 
 }

@@ -93,10 +93,16 @@ class Compare_library
     {
         $base_object_value = $object['base_measurement_ratio'] * $object['measurement_value'];
 
-        //Mass is in cm3
-        $base_asteroid_value = $asteroid['mass'];
+        //Volume is in L
+        $base_asteroid_value = $asteroid[0]['volume'];
 
-        return $this->is_asteroid_larger($base_object_value, $base_asteroid_value);
+        // Check if they are made of the same element?
+        if($this->CI->compare_model->is_same_composition($object, $asteroid)){
+            return $this->is_asteroid_larger($base_object_value, $base_asteroid_value);
+        }
+        else{
+            return array(0, false);
+        }
     }
 
     function calculate_conversion_volume($object,$asteroid)
