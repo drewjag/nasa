@@ -4,13 +4,12 @@
 	<meta charset="utf-8">
 	<title>Asteroid Results</title>
 
-    <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <?$this->load->view('snippets/header_essentials');?>
 
 </head>
 <body>
 
-<div id="container">
+<div class="container">
 	<h1>Asteroid Results</h1>
 
 	<div id="body">
@@ -62,7 +61,9 @@
 
         <h3>Random Objects Compared to Asteroid</h3>
 
+        <!-- <div id="owl-demo" class="owl-carousel"> -->
         <? foreach($comparison_output as $index => $compare_value) : ?>
+            <!-- <div class="item"><img class="lazyOwl" data-src="<?= $compare_value['image_url'] ?>" alt="Lazy Owl Image"></div> -->
 
             <table id="comparison" class="table">
                 <thead>
@@ -97,8 +98,9 @@
             </table>
 
         <? endforeach ?>
+        <!-- </div> -->
 
-	</div>
+    </div>
 
 
 </div>
@@ -110,45 +112,54 @@
 <script src="/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+    
 
-    var $submit = $('#compare_object_submit');
 
-    $submit.click(function () {
-        var object_value = $('#object_compare').find(":selected").val();
-        $.ajax({
-            url: "/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value + "/true",
-            success: function (data) {
-                for(var i=0; i < data.length; i++ ){
-                    var $row = $('#' + i);
-                    $row.find('#object_name').text(data[i].object_name);
-                    $row.find('#num_objects').text(data[i].num_objects);
-                    if(data[i].object_larger){
-                        $row.find('#object_larger').text('Y');
-                    }else{
-                        $row.find('#object_larger').text('N');
+        // $("#owl-demo").owlCarousel({
+        //     items : 4,
+        //     lazyLoad : true
+        // }); 
+
+        var $submit = $('#compare_object_submit');
+
+        $submit.click(function () {
+            var object_value = $('#object_compare').find(":selected").val();
+            $.ajax({
+                url: "/index.php/compare/view_asteroid/<?= $asteroid[0]['asteroid_pk'] ?>/" + object_value + "/true",
+                success: function (data) {
+                    for(var i=0; i < data.length; i++ ){
+                        var $row = $('#' + i);
+                        $row.find('#object_name').text(data[i].object_name);
+                        $row.find('#num_objects').text(data[i].num_objects);
+                        if(data[i].object_larger){
+                            $row.find('#object_larger').text('Y');
+                        }else{
+                            $row.find('#object_larger').text('N');
+                        }
+                        $row.find('#name').text(data[i].name);
+                        $row.find('#image_url').attr('src', data[i].image_url);
+                        var $text = 'You would need ' + data[i].num_objects + ' of this ' + data[i].object_name;
+                        if(data[i].name == 'Diameter'){
+                            $text += ' to go straight through the asteroid!';
+                        }else if(data[i].name == 'Circumference'){
+                            $text += ' to circle the asteroid!';
+                        }
+                        $('#calculation_' + i).text($text);
                     }
-                    $row.find('#name').text(data[i].name);
-                    $row.find('#image_url').attr('src', data[i].image_url);
-                    var $text = 'You would need ' + data[i].num_objects + ' of this ' + data[i].object_name;
-                    if(data[i].name == 'Diameter'){
-                        $text += ' to go straight through the asteroid!';
-                    }else if(data[i].name == 'Circumference'){
-                        $text += ' to circle the asteroid!';
-                    }
-                    $('#calculation_' + i).text($text);
-                }
-            },
-            dataType: 'json'
+                },
+                dataType: 'json'
+            });
+
+        });
+
+        var $compare_object_dropdown = $('#object_compare');
+        var $compare_type_dropdown = $('#compare_type_input');
+
+        $compare_object_dropdown.change(function() {
+            $compare_type_dropdown.show();
         });
 
     });
-
-    var $compare_object_dropdown = $('#object_compare');
-    var $compare_type_dropdown = $('#compare_type_input');
-
-    $compare_object_dropdown.change(function() {
-        $compare_type_dropdown.show();
-    });
-
 
 </script>
